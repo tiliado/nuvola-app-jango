@@ -2,10 +2,12 @@
     "id": "jango",
     "name": "Jango",
     "maintainer_name": "Stefano Bagnatica?",
-    "maintainer_link": "https://github.com/FIXME",
+    "maintainer_link": "https://github.com/thepisu",
     "version_major": 2,
     "version_minor": 0,
     "api_major": 3,
     "api_minor": 0,
-    "categories": "AudioVideo;Audio;"
+    "categories": "AudioVideo;Audio;",
+    "home_url": "http://www.jango.com/",
+    "allowed_uri": "https?://www.jango.com/"
 }
