@@ -20,4 +20,5 @@ Copyright
 ---------
 
   - Copyright 2014 Jiří Janoušek <janousek.jiri@gmail.com>
+  - Copyright 2014 Stefano Bagnatica <thepisu@gmail.com>
   - License: [2-Clause BSD-license](./LICENSE)
