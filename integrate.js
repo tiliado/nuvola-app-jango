@@ -62,9 +62,9 @@
 		Nuvola.WebApp._onInitAppRunner.call(this, emitter);
 
 		Nuvola.actions.addAction("playback", "win", ACTION_THUMBS_UP, C_("Action", "Thumbs up"),
-			null, null, null, true);
+			null, null, null, null);
 		Nuvola.actions.addAction("playback", "win", ACTION_THUMBS_DOWN, C_("Action", "Thumbs down"),
-			null, null, null, true);
+			null, null, null, null);
 	}
 
 	// Page is ready for magic
@@ -108,39 +108,32 @@
 				// is still loading music... wait some more...
 				setTimeout(this.update.bind(this), 250);
 				return;
-			} else {
-				// Retrieve playing status details
-				if (this.isPlaying()) {
-					state = PlaybackState.PLAYING;			
-				} else {
-					state = PlaybackState.PAUSED;
-				}
-				
-				// Retrieve artist details
-				var el = this.getJangoElement('player_current_artist');
-				if (el != null) {
-					var elLink = el.getElementsByTagName("a");
-					if (elLink.length > 0) artist = elLink[0].textContent.trim();
-					else artist = el.textContent.trim();
-				}
-				
-				// I use station name as album name (no album declared in Jango)
-				el = this.getJangoElement("nowpln");
-				if (el != null) album = el.title;
-				
-				// I use current song image as album art
-				el = this.getJangoElement('player_main_pic_img');
-				if (el != null) album_art = el.src;
 			}
+			
+			// Retrieve playing status details
+			state = this.isPlaying() ? PlaybackState.PLAYING : PlaybackState.PAUSED;
+			
+			// Retrieve artist details
+			var el = this.getJangoElement('player_current_artist');
+			if (el != null) {
+				var elLink = el.getElementsByTagName("a");
+				if (elLink.length > 0) artist = elLink[0].textContent.trim();
+				else artist = el.textContent.trim();
+			}
+			
+			// I use station name as album name (no album declared in Jango)
+			el = this.getJangoElement("nowpln");
+			if (el != null) album = el.title;
+			
+			// I use current song image as album art
+			el = this.getJangoElement('player_main_pic_img');
+			if (el != null) album_art = el.src;			
 		}
 		
 		// Update actions		
 		var actionsEnabled = {};
-		var actionsStates = {};
 		actionsEnabled[ACTION_THUMBS_UP] = false;
 		actionsEnabled[ACTION_THUMBS_DOWN] = false;
-		actionsStates[ACTION_THUMBS_UP] = false;
-		actionsStates[ACTION_THUMBS_DOWN] = false;
 		switch (state) {
 			case PlaybackState.PLAYING:
 				player.setCanGoNext(true);
@@ -161,23 +154,7 @@
 				player.setCanPause(false);
 				player.setCanPlay(false);
 		}
-		if (actionsEnabled[ACTION_THUMBS_UP] == true) {
-			// if I already done thumb up for this song, it's flagged
-			if (this.lastThumbUp == song) {
-				actionsStates[ACTION_THUMBS_UP] = true;
-			} else {
-				actionsStates[ACTION_THUMBS_UP] = false;
-			}
-		}
-		if (actionsEnabled[ACTION_THUMBS_DOWN] == true) {
-			if (this.lastThumbDown == song) {
-				actionsStates[ACTION_THUMBS_DOWN] = true;
-			} else {
-				actionsStates[ACTION_THUMBS_DOWN] = false;
-			}			
-		}
 		Nuvola.actions.updateEnabledFlags(actionsEnabled);
-		Nuvola.actions.updateStates(actionsStates);	
 		
 		// set track info 
 		var track = {
@@ -216,22 +193,13 @@
 				this.clickJangoButton("btn-fav");
 				setTimeout(this.autoCommit.bind(this), 250);
 				this.lastThumbUp = this.getCurrentSongName();
-				this.setCustomActionState(ACTION_THUMBS_UP, true);
 				break;
 			case ACTION_THUMBS_DOWN:
 				this.clickJangoButton("player_ban");
 				setTimeout(this.autoCommit.bind(this), 250);
 				this.lastThumbDown = this.getCurrentSongName();
-				this.setCustomActionState(ACTION_THUMBS_DOWN, true);
 				break;
 		}
-	}
-	
-	WebApp.setCustomActionState = function(action, state)
-	{
-		var actionsStates = {};
-		actionsStates[action] = state;
-		Nuvola.actions.updateStates(actionsStates);	
 	}
 	
 	/**
