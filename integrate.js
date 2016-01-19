@@ -98,37 +98,33 @@
 		var artist = null;
 		var album = null;
 		
-		// top.content is null, you have not selected a station yet...
-		if (top.content != null) {
-			
-			// Retrieve song details
-			song = this.getCurrentSongName();
-			
-			if (song == null || song == "Loading Music…") {
-				// is still loading music... wait some more...
-				setTimeout(this.update.bind(this), 250);
-				return;
-			}
-			
-			// Retrieve playing status details
-			state = this.isPlaying() ? PlaybackState.PLAYING : PlaybackState.PAUSED;
-			
-			// Retrieve artist details
-			var el = this.getJangoElement('player_current_artist');
-			if (el != null) {
-				var elLink = el.getElementsByTagName("a");
-				if (elLink.length > 0) artist = elLink[0].textContent.trim();
-				else artist = el.textContent.trim();
-			}
-			
-			// I use station name as album name (no album declared in Jango)
-			el = this.getJangoElement("nowpln");
-			if (el != null) album = el.title;
-			
-			// I use current song image as album art
-			el = this.getJangoElement('player_main_pic_img');
-			if (el != null) album_art = el.src;			
+		// Retrieve song details
+		song = this.getCurrentSongName();
+		
+		if (song == null || song == "Loading Music…") {
+			// is still loading music... wait some more...
+			setTimeout(this.update.bind(this), 250);
+			return;
 		}
+		
+		// Retrieve playing status details
+		state = this.isPlaying() ? PlaybackState.PLAYING : PlaybackState.PAUSED;
+		
+		// Retrieve artist details
+		var el = this.getJangoElement('player_current_artist');
+		if (el != null) {
+			var elLink = el.getElementsByTagName("a");
+			if (elLink.length > 0) artist = elLink[0].textContent.trim();
+			else artist = el.textContent.trim();
+		}
+		
+		// I use station name as album name (no album declared in Jango)
+		el = this.getJangoElement("nowpln");
+		if (el != null) album = el.title;
+		
+		// I use current song image as album art
+		el = this.getJangoElement('player_main_pic_img');
+		if (el != null) album_art = el.src;			
 		
 		// Update actions		
 		var actionsEnabled = {};
@@ -208,7 +204,7 @@
 	 */
 	WebApp.getJangoElement = function(id)
 	{
-		return top.content.document.getElementById(id);
+		return document.getElementById(id);
 	}
 	
 	/**
@@ -244,7 +240,7 @@
 	WebApp.autoCommit = function()
 	{
 		// find the commit button
-		var els = top.content.document.getElementsByName("commit");
+		var els = document.getElementsByName("commit");
 		if (els != null && els.length > 0) {
 			var element = els[0];
 			Nuvola.clickOnElement(element);
