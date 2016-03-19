@@ -1,6 +1,7 @@
 {
     "id": "jango",
     "name": "Jango",
+    "requirements": "HTML5AudioRequired",
     "maintainer_name": "Stefano Bagnatica",
     "maintainer_link": "https://github.com/thepisu",
     "version_major": 2,
