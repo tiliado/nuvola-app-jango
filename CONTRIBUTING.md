@@ -1,14 +1,14 @@
-Contributing to Jango script
+Contributing to Happy Songs script
 ==================================
 
-:+1::tada: It seems you would like to contribute to the Jango script for Nuvola Player.
+:+1::tada: It seems you would like to contribute to the Happy Songs script for Nuvola Player.
 Great to have you here. Here are a few ways you can help make this script better! :tada::+1:
 
 Support & Bug Reporting
 -----------------------
 
-Whenever you encounter a bug in Nuvola Player, don't hesitate to report it. First of all, it is
-necessary to submit your issue to the right place.
+Whenever you encounter a bug in Nuvola Player, don't hesitate to report it. **First of all, it is
+necessary to submit your issue to the right place.**
 
 ### Tiliado.eu Website
 
