@@ -10,5 +10,6 @@
     "api_minor": 0,
     "categories": "AudioVideo;Audio;",
     "home_url": "http://www.jango.com/",
-    "allowed_uri": "https?://www.jango.com/"
+    "allowed_uri": "https?://www.jango.com/",
+    "license": "2-Clause BSD" 
 }
