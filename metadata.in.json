@@ -1,0 +1,22 @@
+{
+    "id": "jango", 
+    "name": "Jango", 
+    "requirements": "HTML5AudioRequired", 
+    "maintainer_name": "Stefano Bagnatica", 
+    "maintainer_link": "https://github.com/thepisu", 
+    "version_major": 2, 
+    "version_minor": 2, 
+    "api_major": 3, 
+    "api_minor": 0, 
+    "categories": "AudioVideo;Audio;", 
+    "home_url": "http://www.jango.com/", 
+    "allowed_uri": "https?://www.jango.com/", 
+    "license": "2-Clause BSD", 
+    "build": {
+        "icons": [
+            "src/icon.svg SCALABLE 64 128 256", 
+            "src/icon-xs.svg 16 22 24", 
+            "src/icon-sm.svg 32 48"
+        ]
+    }
+}
