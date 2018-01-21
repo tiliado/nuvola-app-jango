@@ -110,17 +110,22 @@
 		// Retrieve playing status details
 		state = this.isPlaying() ? PlaybackState.PLAYING : PlaybackState.PAUSED;
 		
-		// Retrieve artist details
+		// Retrieve artist and album details
 		var el = this.getJangoElement('player_current_artist');
 		if (el != null) {
 			var elLink = el.getElementsByTagName("a");
 			if (elLink.length > 0) artist = elLink[0].textContent.trim();
 			else artist = el.textContent.trim();
+            
+            // now album name is declared near the artist name
+            if (el.childNodes.length > 4) album = el.childNodes[4].textContent;        
 		}
-		
-		// I use station name as album name (no album declared in Jango)
-		el = this.getJangoElement("nowpln");
+        
+        // old album mode (radio station name)
+        /*
+        el = this.getJangoElement("nowpln");
 		if (el != null) album = el.title;
+        */
 		
 		// I use current song image as album art
 		el = this.getJangoElement('player_main_pic_img');
