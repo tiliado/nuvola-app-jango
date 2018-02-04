@@ -1,6 +1,9 @@
 Changelog
 =========
 
+  * Changed album name loading, now it reads the real album name, if available from Jango.
+    Issue: tiliado/nuvola-app-jango#12
+
 2.3 - February 12th, 2017
 -------------------------
 

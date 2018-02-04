@@ -25,7 +25,7 @@ Copyright
     + License: [2-Clause BSD-license](./LICENSE-BSD.txt)
 
   - Other files:
-    + Copyright 2014-2017 Jiří Janoušek <janousek.jiri@gmail.com>
-    + Copyright 2014-2017 Stefano Bagnatica <thepisu@gmail.com>
+    + Copyright 2014-2018 Jiří Janoušek <janousek.jiri@gmail.com>
+    + Copyright 2014-2018 Stefano Bagnatica <thepisu@gmail.com>
     + License: [2-Clause BSD-license](./LICENSE-BSD.txt)
 
