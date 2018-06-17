@@ -4,6 +4,7 @@ Changelog
   * Changed album name loading, now it reads the real album name, if available from Jango.
     Issue: tiliado/nuvola-app-jango#12
   * Integrate volume management. Issue: tiliado/nuvola-app-jango#16
+  * New maintainer: Jiří Janoušek.
 
 2.3 - February 12th, 2017
 -------------------------
