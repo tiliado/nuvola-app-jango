@@ -79,6 +79,7 @@
     // inizialize last thumb up / down variables
     this.lastThumbUp = null
     this.lastThumbDown = null
+    this.volumeInitialized = false
 
     // Start update routine
     this.update()
@@ -158,6 +159,14 @@
     // set playback state (playing / pause)
     player.setPlaybackState(state)
 
+    var elms = this._getElements()
+    if (elms.volumeBar) {
+      // ~ elms.volumeBar.parentNode.parentNode.style.display = 'block'
+      player.updateVolume(elms.volumeBar.style.left.split('%')[0] / 100)
+      // ~ elms.volumeBar.parentNode.parentNode.style.display = 'none'
+    }
+    player.setCanChangeVolume(!!elms.volumeBar)
+
     // Schedule the next update
     setTimeout(this.update.bind(this), 500)
   }
@@ -175,7 +184,14 @@
       case PlayerAction.NEXT_SONG:
         this.clickJangoButton('btn-ff')
         break
-
+      case PlayerAction.CHANGE_VOLUME:
+        var elms = this._getElements()
+        elms.volumeIcon.style.display = 'none'
+        elms.volumeBar.parentNode.parentNode.style.display = 'block'
+        Nuvola.clickOnElement(elms.volumeBar.parentNode, param, 0.5)
+        elms.volumeBar.parentNode.parentNode.style.display = 'none'
+        elms.volumeIcon.style.display = 'block'
+        break
       /* Custom actions */
       case ACTION_THUMBS_UP:
         this.clickJangoButton('btn-fav')
@@ -188,6 +204,21 @@
         this.lastThumbDown = this.getCurrentSongName()
         break
     }
+  }
+
+  WebApp._getElements = function () {
+    var elms = {
+      volumeIcon: document.getElementById('volume_icon'),
+      volumeBar: document.getElementById('volumeHandle')
+    }
+    if (elms.volumeIcon && elms.volumeBar && !this.volumeInitialized) {
+      Nuvola.triggerMouseEvent(elms.volumeIcon, 'mouseover')
+      Nuvola.triggerMouseEvent(elms.volumeBar, 'mouseout')
+      elms.volumeBar.parentNode.parentNode.style.display = 'none'
+      elms.volumeIcon.style.display = 'block'
+      this.volumeInitialized = true
+    }
+    return elms
   }
 
   /**
