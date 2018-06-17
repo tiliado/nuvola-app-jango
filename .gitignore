@@ -6,3 +6,9 @@ eu.tiliado.NuvolaAppJango.desktop
 jango.tar.gz
 metadata.json
 nuvola-app-jango
+eu.tiliado.NuvolaAppJango.service
+eu.tiliado.WebRuntimeAppJango.appdata.xml
+eu.tiliado.WebRuntimeAppJango.desktop
+eu.tiliado.WebRuntimeAppJango.service
+nuvola-app-jango.metainfo.xml
+/screenshots/
