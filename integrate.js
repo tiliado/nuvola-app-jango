@@ -121,8 +121,11 @@
     el = this.getJangoElement('player_main_pic_img')
     if (el != null) albumArt = el.src
 
+    var shuffle = this._getShuffleButton()
+
     // Update actions
     var actionsEnabled = {}
+    actionsEnabled[PlayerAction.SHUFFLE] = !!shuffle
     actionsEnabled[ACTION_THUMBS_UP] = false
     actionsEnabled[ACTION_THUMBS_DOWN] = false
     switch (state) {
@@ -146,6 +149,7 @@
         player.setCanPlay(false)
     }
     Nuvola.actions.updateEnabledFlags(actionsEnabled)
+    Nuvola.actions.updateState(PlayerAction.SHUFFLE, shuffle && shuffle.parentNode.classList.contains('on'))
 
     // set track info
     var track = {
@@ -192,6 +196,9 @@
         elms.volumeBar.parentNode.parentNode.style.display = 'none'
         elms.volumeIcon.style.display = 'block'
         break
+      case PlayerAction.SHUFFLE:
+        Nuvola.clickOnElement(this._getShuffleButton())
+        break
       /* Custom actions */
       case ACTION_THUMBS_UP:
         this.clickJangoButton('btn-fav')
@@ -219,6 +226,10 @@
       this.volumeInitialized = true
     }
     return elms
+  }
+
+  WebApp._getShuffleButton = function () {
+    return document.querySelector('#action_shuffle a')
   }
 
   /**
