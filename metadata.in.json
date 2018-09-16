@@ -6,7 +6,7 @@
   "version_major": 2,
   "version_minor": 4,
   "api_major": 4,
-  "api_minor": 11,
+  "api_minor": 13,
   "requirements": "Chromium[65] Codec[MP3] Feature[MSE]",
   "categories": "AudioVideo;Audio;",
   "home_url": "http://www.jango.com/",
