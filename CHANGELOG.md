@@ -1,6 +1,9 @@
 Changelog
 =========
 
+  * Nuvola 4.13 is required.
+  * The shuffle status was integrated. Issue: tiliado/nuvolaruntime#20
+
 2.4 - June 30th, 2018
 ---------------------
 
