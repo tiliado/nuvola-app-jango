@@ -1,4 +1,4 @@
-Jango • Nuvola Apps Runtime
+Jango • Nuvola Apps Runtime [![CircleCI](https://circleci.com/gh/tiliado/nuvola-app-jango/tree/master.svg?style=svg)](https://circleci.com/gh/tiliado/nuvola-app-jango/tree/master)
 ===========================
 
 Integration of Jango into your linux desktop via
