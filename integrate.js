@@ -27,27 +27,27 @@
 
 (function (Nuvola) {
   // Create media player component
-  var player = Nuvola.$object(Nuvola.MediaPlayer)
+  const player = Nuvola.$object(Nuvola.MediaPlayer)
 
   // Translations
-  var C_ = Nuvola.Translate.pgettext
+  const C_ = Nuvola.Translate.pgettext
 
   // Custom actions
-  var ACTION_THUMBS_UP = 'thumbs-up'
-  var ACTION_THUMBS_DOWN = 'thumbs-down'
+  const ACTION_THUMBS_UP = 'thumbs-up'
+  const ACTION_THUMBS_DOWN = 'thumbs-down'
 
   // Handy aliases
-  var PlaybackState = Nuvola.PlaybackState
-  var PlayerAction = Nuvola.PlayerAction
+  const PlaybackState = Nuvola.PlaybackState
+  const PlayerAction = Nuvola.PlayerAction
 
   // Create new WebApp prototype
-  var WebApp = Nuvola.$WebApp()
+  const WebApp = Nuvola.$WebApp()
 
   // Initialization routines
   WebApp._onInitWebWorker = function (emitter) {
     Nuvola.WebApp._onInitWebWorker.call(this, emitter)
 
-    var state = document.readyState
+    const state = document.readyState
     if (state === 'interactive' || state === 'complete') {
       this._onPageReady()
     } else {
@@ -73,7 +73,7 @@
     player.setCanGoPrev(false)
 
     // custom actions
-    var actions = [ACTION_THUMBS_UP, ACTION_THUMBS_DOWN]
+    const actions = [ACTION_THUMBS_UP, ACTION_THUMBS_DOWN]
     player.addExtraActions(actions)
 
     // inizialize last thumb up / down variables
@@ -88,11 +88,11 @@
   // Extract data from the web page
   WebApp.update = function () {
     // Default values
-    var state = PlaybackState.UNKNOWN
-    var albumArt = null
-    var song = null
-    var artist = null
-    var album = null
+    let state = PlaybackState.UNKNOWN
+    let albumArt = null
+    let song = null
+    let artist = null
+    let album = null
 
     // Retrieve song details
     song = this.getCurrentSongName()
@@ -107,13 +107,13 @@
     state = this.isPlaying() ? PlaybackState.PLAYING : PlaybackState.PAUSED
 
     // Retrieve artist and album details
-    var el = this.getJangoElement('player_current_artist')
+    let el = this.getJangoElement('player_current_artist')
     if (el != null) {
-      var elLink = el.getElementsByTagName('a')
+      const elLink = el.getElementsByTagName('a')
       if (elLink.length > 0) artist = elLink[0].textContent.trim()
       else artist = el.textContent.trim()
 
-            // now album name is declared near the artist name
+      // now album name is declared near the artist name
       if (el.childNodes.length > 4) album = el.childNodes[4].textContent
     }
 
@@ -121,10 +121,10 @@
     el = this.getJangoElement('player_main_pic_img')
     if (el != null) albumArt = el.src
 
-    var shuffle = this._getShuffleButton()
+    const shuffle = this._getShuffleButton()
 
     // Update actions
-    var actionsEnabled = {}
+    const actionsEnabled = {}
     actionsEnabled[PlayerAction.SHUFFLE] = !!shuffle
     actionsEnabled[ACTION_THUMBS_UP] = false
     actionsEnabled[ACTION_THUMBS_DOWN] = false
@@ -152,7 +152,7 @@
     Nuvola.actions.updateState(PlayerAction.SHUFFLE, shuffle && shuffle.parentNode.classList.contains('on'))
 
     // set track info
-    var track = {
+    const track = {
       title: song,
       artist: artist,
       album: album,
@@ -163,7 +163,7 @@
     // set playback state (playing / pause)
     player.setPlaybackState(state)
 
-    var elms = this._getElements()
+    const elms = this._getElements()
     if (elms.volumeBar) {
       // ~ elms.volumeBar.parentNode.parentNode.style.display = 'block'
       player.updateVolume(elms.volumeBar.style.left.split('%')[0] / 100)
@@ -188,14 +188,15 @@
       case PlayerAction.NEXT_SONG:
         this.clickJangoButton('btn-ff')
         break
-      case PlayerAction.CHANGE_VOLUME:
-        var elms = this._getElements()
+      case PlayerAction.CHANGE_VOLUME: {
+        const elms = this._getElements()
         elms.volumeIcon.style.display = 'none'
         elms.volumeBar.parentNode.parentNode.style.display = 'block'
         Nuvola.clickOnElement(elms.volumeBar.parentNode, param, 0.5)
         elms.volumeBar.parentNode.parentNode.style.display = 'none'
         elms.volumeIcon.style.display = 'block'
         break
+      }
       case PlayerAction.SHUFFLE:
         Nuvola.clickOnElement(this._getShuffleButton())
         break
@@ -214,7 +215,7 @@
   }
 
   WebApp._getElements = function () {
-    var elms = {
+    const elms = {
       volumeIcon: document.getElementById('volume_icon'),
       volumeBar: document.getElementById('volumeHandle')
     }
@@ -252,13 +253,13 @@
    * Find if Jango is playing, looking for button class name
    */
   WebApp.isPlaying = function () {
-    var el = this.getJangoElement('btn-playpause')
+    const el = this.getJangoElement('btn-playpause')
     if (el == null) return false
     return (el.className === 'player_ctrls pause')
   }
 
   WebApp.getCurrentSongName = function () {
-    var el = this.getJangoElement('current-song')
+    const el = this.getJangoElement('current-song')
     if (el == null) return null
     return el.textContent.trim()
   }
@@ -269,9 +270,9 @@
    */
   WebApp.autoCommit = function () {
     // find the commit button
-    var els = document.getElementsByName('commit')
+    const els = document.getElementsByName('commit')
     if (els != null && els.length > 0) {
-      var element = els[0]
+      const element = els[0]
       Nuvola.clickOnElement(element)
     } else {
       // the commit button could not be ready... retry for max 4 times
@@ -283,4 +284,4 @@
   }
 
   WebApp.start()
-})(this)  // function(Nuvola)
+})(this) // function(Nuvola)
